@@ -1,18 +1,8 @@
-<script setup lang="ts">
-import AppAlert from '~/components/shared/AppAlert.vue';
-
-interface Person {
-  firstName: string;
-  lastName: string;
-  age?: number;
-}
-const me: Person = {
-  firstName: 'Serqio',
-  lastName: 'Vella'
-}
-const appConfig = useAppConfig()
+<script setup>
 </script>
 
 <template>
-  <NuxtPage/>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
