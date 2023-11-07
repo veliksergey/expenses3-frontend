@@ -1,9 +1,8 @@
 <script setup>
-import AppBreadcrumb from './AppBreadcrumb.vue';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from './composables/layout';
 
-const { onMenuToggle, onProfileSidebarToggle, onConfigSidebarToggle } = useLayout();
+const { onMenuToggle} = useLayout();
 
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
@@ -40,13 +39,6 @@ const isOutsideClicked = (event) => {
 
     return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
 };
-
-const showProfileSidebar = () => {
-    onProfileSidebarToggle();
-};
-const onConfigButtonClick = () => {
-    onConfigSidebarToggle();
-};
 </script>
 
 <template>
@@ -55,25 +47,6 @@ const onConfigButtonClick = () => {
             <Button type="button" class="topbar-menubutton p-link p-trigger" @click="onMenuToggle">
                 <i class="pi pi-bars"></i>
             </Button>
-
-            <AppBreadcrumb class="topbar-breadcrumb"></AppBreadcrumb>
-        </div>
-
-        <div class="topbar-end">
-            <ul class="topbar-menu">
-                <li class="topbar-search">
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <InputText type="text" placeholder="Search" class="w-12rem sm:w-full" />
-                    </span>
-                </li>
-                <li class="ml-3">
-                    <Button icon="pi pi-cog" text rounded severity="secondary" @click="onConfigButtonClick"></Button>
-                </li>
-                <li class="topbar-profile">
-                    <Button type="button" class="p-link" @click="showProfileSidebar"><img src="/demo/images/avatar/avatar.png" alt="Profile" /></Button>
-                </li>
-            </ul>
         </div>
     </div>
 </template>

@@ -100,9 +100,9 @@ const onRippleChange = (value) => {
 </script>
 
 <template>
-    <button class="layout-config-button config-link" type="button" @click="onConfigButtonClick()">
+<!--    <button class="layout-config-button config-link" type="button" @click="onConfigButtonClick()">
         <i class="pi pi-cog"></i>
-    </button>
+    </button>-->
 
     <Sidebar v-model:visible="layoutState.configSidebarVisible.value" position="right" class="layout-config-sidebar w-20rem">
         <h5>Themes</h5>

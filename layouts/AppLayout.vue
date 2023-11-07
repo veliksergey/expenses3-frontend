@@ -4,8 +4,6 @@ import { usePrimeVue } from 'primevue/config';
 import AppTopbar from './AppTopbar.vue';
 import AppSidebar from './AppSidebar.vue';
 import AppConfig from './AppConfig.vue';
-import AppProfileSidebar from './AppProfileSidebar.vue';
-import AppBreadCrumb from './AppBreadcrumb.vue';
 import { useLayout } from './composables/layout';
 
 const $primevue = usePrimeVue();
@@ -84,16 +82,11 @@ const isOutsideClicked = (event) => {
 
         <div class="layout-content-wrapper">
             <AppTopbar ref="topbarRef" />
-            <AppBreadCrumb class="content-breadcrumb"></AppBreadCrumb>
             <div class="layout-content">
-                <router-view></router-view>
+                <NuxtPage></NuxtPage>
             </div>
         </div>
 
-        <AppProfileSidebar />
         <AppConfig />
-
-        <Toast></Toast>
-        <div class="layout-mask"></div>
     </div>
 </template>
