@@ -34,7 +34,6 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
   <Dialog v-model:visible="categoryStore.displayEditDialog" modal :header="dialogHeader" :style="{ width: '40rem' }">
-    {{ categoryStore.selectedCategory }}
     <form @submit.prevent="onSubmit()">
       <div class="field">
         <label for="name">Full name</label>

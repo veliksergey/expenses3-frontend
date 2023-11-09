@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxi dev --dotenv .env.local",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -21,6 +21,7 @@
     "@fullcalendar/vue3": "^6.1.9",
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/nuxt": "^4.11.8",
+    "@vee-validate/yup": "^4.11.8",
     "chart.js": "^4.4.0",
     "pinia": "^2.1.7",
     "primeflex": "^3.3.1",

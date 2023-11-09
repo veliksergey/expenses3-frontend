@@ -1,5 +1,4 @@
 import {defineStore} from 'pinia';
-const baseUrl = 'http://localhost:3003';
 
 export interface Category {
   id?: number;
@@ -32,14 +31,16 @@ export const useCategoryStore = defineStore('CategoryStore', {
 
   actions: {
     async getList(fromApi: boolean) {
+      const myApi = new useMyApi();
       this.isLoadingList = true;
       if (fromApi || !this.categories.length) {
-        const {data, error, pending}: any = await useFetch(`${baseUrl}/categories`);
+        const {data, error, pending}: any = await myApi.get('categories');
         this.categories = data.value || [];
       }
       this.isLoadingList = false;
     },
     async getOne(id: number, fromApi: boolean) {
+      const myApi = new useMyApi();
       this.isLoadingOne = true;
       if (!fromApi && this.categories.length) {
         const foundCategory: Category | undefined = this.categories.find(c => c.id === id);
@@ -49,23 +50,17 @@ export const useCategoryStore = defineStore('CategoryStore', {
           return;
         }
       }
-      const {data, error, pending}: any = await useFetch(`${baseUrl}/categories/${id}`);
+      const {data, error, pending}: any = await myApi.get(`categories/${id}`);
       this.selectedCategory = data.value || null;
       this.isLoadingOne = false;
     },
     async createOrUpdate(category: Category) {
+      const myApi = new useMyApi();
       this.isSaving = true;
-      console.log('-- createOrUpdate:', category);
       if (category.id && category.id > 0) {
-        const {data}: any = await useFetch(`${baseUrl}/categories/${category.id}`, {
-          method: 'put',
-          body: category,
-        });
+        const {data}: any = await myApi.put(`categories/${category.id}`, category);
       } else {
-        const {data}: any = await useFetch(`${baseUrl}/categories`, {
-          method: 'post',
-          body: category
-        });
+        const {data}: any = await myApi.post(`categories`, category);
       }
       this.isSaving = false;
       this.selectedCategory = null;
@@ -73,11 +68,9 @@ export const useCategoryStore = defineStore('CategoryStore', {
       this.getList(true);
     },
     async delete(id: number) {
+      const myApi = new useMyApi();
       this.isDeleting = true;
-      const {data}: any = await useFetch(`${baseUrl}/categories`, {
-        method: 'delete',
-        body: {id},
-      });
+      const {data}: any = await myApi.delete('categories', {id});
       this.isDeleting = false;
       this.selectedCategory = null;
       this.getList(true);
