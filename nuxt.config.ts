@@ -26,6 +26,7 @@ export default defineNuxtConfig({
 	modules: [
 		'nuxt-primevue',
 		'@pinia/nuxt',
+		'@vee-validate/nuxt'
 	],
 	primevue: {
 		usePrimeVue: true,

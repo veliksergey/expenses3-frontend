@@ -9,10 +9,10 @@ export interface Category {
 type State = {
   categories: Category[],
   selectedCategory: Category | null,
+  displayEditDialog: boolean,
   isLoadingList: boolean,
   isLoadingOne: boolean,
-  isCreating: boolean;
-  isUpdating: boolean;
+  isSaving: boolean;
   isDeleting: boolean;
 }
 
@@ -22,10 +22,10 @@ export const useCategoryStore = defineStore('CategoryStore', {
     return {
       categories: [],
       selectedCategory: null,
+      displayEditDialog: false,
       isLoadingList: false,
       isLoadingOne: false,
-      isCreating: false,
-      isUpdating: false,
+      isSaving: false,
       isDeleting: false,
     }
   },
@@ -53,32 +53,24 @@ export const useCategoryStore = defineStore('CategoryStore', {
       this.selectedCategory = data.value || null;
       this.isLoadingOne = false;
     },
-    async create(category: Category) {
-      this.isCreating = true;
-      const {data}: any = await useFetch(`${baseUrl}/categories`, {
-        method: 'post',
-        body: category
-      });
-      this.selectedCategory = data.value || null;
-      this.isCreating = false;
-      this.getList(true);
-    },
-    async update(category: Category) {
-      this.isUpdating = true;
-      const {data}: any = await useFetch(`${baseUrl}/categories/${category.id}`, {
-        method: 'put',
-        body: category,
-      });
-      this.selectedCategory = data.value || null;
-      this.getList(true);
-      this.isUpdating = false;
-    },
     async createOrUpdate(category: Category) {
+      this.isSaving = true;
+      console.log('-- createOrUpdate:', category);
       if (category.id && category.id > 0) {
-        await this.update(category);
+        const {data}: any = await useFetch(`${baseUrl}/categories/${category.id}`, {
+          method: 'put',
+          body: category,
+        });
       } else {
-        await this.create(category);
+        const {data}: any = await useFetch(`${baseUrl}/categories`, {
+          method: 'post',
+          body: category
+        });
       }
+      this.isSaving = false;
+      this.selectedCategory = null;
+      this.displayEditDialog = false;
+      this.getList(true);
     },
     async delete(id: number) {
       this.isDeleting = true;
@@ -100,7 +92,7 @@ export const useCategoryStore = defineStore('CategoryStore', {
       return (id: number): Category | null => {
         return categories.find((category) => category.id === id) || null;
       }
-    }
+    },
   }
   
 });
