@@ -32,15 +32,19 @@ const onEdit = (category?: Category) => {
 const confirm = useConfirm();
 const confirmDeletion = (category: Category) => {
   confirm.require({
-    message: `Are you sure you want to delete category ${categoryStore.selectedCategory?.name}?`,
-    header: 'Delete Category',
+    message: `Are you sure you want to delete category "${category?.name}"?`,
+    header: 'Delete Category?',
     icon: 'pi pi-info-circle',
     rejectClass: 'p-button-secondary p-button-text',
     acceptClass: 'p-button-danger p-button-text',
+    rejectIcon: 'pi pi-times',
+    acceptIcon: 'pi pi-trash',
+    rejectLabel: 'Cancel',
+    acceptLabel: 'Delete',
+    defaultFocus: 'reject',
     accept: () => {
       categoryStore.delete(category?.id || 0);
     },
-    reject: () => {}
   })
 }
 </script>
@@ -115,7 +119,9 @@ const confirmDeletion = (category: Category) => {
       </Column>
     </DataTable>
 
+    <!-- create/edit dialog -->
     <CategoryFormDialog v-if="categoryStore.displayEditDialog && categoryStore.selectedCategory"/>
+    <!-- delete dialog -->
     <ConfirmDialog></ConfirmDialog>
   </div>
 </template>
