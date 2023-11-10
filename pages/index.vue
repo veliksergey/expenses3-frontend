@@ -1,11 +1,13 @@
 <script setup lang='ts'>
-const categoryStore = useCategoryStore();
+const commonStore = useCommonStore();
 
-categoryStore.getOne(2, true);
+setTimeout(() => {
+  commonStore.getList('categories');
+}, 1000);
 </script>
 
 <template>
   <h2>Home Page</h2>
   tt:
-  <p>{{ categoryStore.selectedCategory }}</p>
+  <p>{{ commonStore.list }}</p>
 </template>

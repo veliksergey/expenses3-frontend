@@ -19,6 +19,55 @@ const model = ref([
       navigateTo({ path: '/categories' });
     },
   },
+  {
+    label: 'Categories',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/categories'})
+    }
+  },
+  {
+    label: 'Types',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/types'})
+    }
+  },
+  {
+    label: 'Accounts',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/accounts'})
+    }
+  },
+  {
+    label: 'Vendors',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/vendors'})
+    }
+  },
+  {
+    label: 'Statuses',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/statuses'})
+    }
+  },
+  {
+    label: 'Conditions',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/conditions'})
+    }
+  },
+  {
+    label: 'Users',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/users'})
+    }
+  },
 ]);
 
 const onConfigButtonClick = () => {
