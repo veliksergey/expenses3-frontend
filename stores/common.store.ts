@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 export interface CommonModel {
   id?: number;
   name: string;
-  tags: string[];
+  description?: string;
+  tags?: string[];
 }
 type State = {
   list: CommonModel[];
@@ -20,8 +21,8 @@ export const useCommonStore = defineStore('CommonStore', {
     return {
       list: [],
       selected: null,
-      isLoadingList: false,
       displayEditDialog: false,
+      isLoadingList: false,
       isLoadingOne: false,
       isSaving: false,
       isDeleting: false,

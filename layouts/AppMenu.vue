@@ -13,10 +13,17 @@ const model = ref([
     },
   },
   {
-    label: 'Categories',
+    label: 'Records',
     icon: '',
     command: () => {
-      navigateTo({ path: '/categories' });
+      navigateTo({ path: '/records' });
+    },
+  },
+  {
+    label: 'Projects',
+    icon: '',
+    command: () => {
+      navigateTo({ path: '/common/projects' });
     },
   },
   {

@@ -13,6 +13,7 @@ const { defineComponentBinds, handleSubmit, resetForm, errors } = useForm({
   validationSchema: yup.object({
     id: yup.number(),
     name: yup.string().required().trim().label('Name'),
+    description: yup.string().trim().label('Description'), // ToDo: max length
     tags: yup.array().label('Tags'),
   }),
   initialValues: { ...commonStore.selected },
@@ -21,6 +22,7 @@ const { defineComponentBinds, handleSubmit, resetForm, errors } = useForm({
 const form = ref({
   name: defineComponentBinds('name'),
   tags: defineComponentBinds('tags'),
+  description: defineComponentBinds('description'),
 });
 
 const isNew = computed((): boolean => (commonStore.selected?.id ? false : true));
@@ -50,6 +52,11 @@ const onSubmit = handleSubmit((values) => {
       <div class="field">
         <label for="tags">Tags:</label>
         <Chips v-bind="form.tags" separator="," :add-on-blur="true" :allow-duplicate="false" />
+      </div>
+
+      <div class="field">
+        <label for="description">Description:</label>
+        <Textarea v-bind="form.description"/>
       </div>
     </form>
 
